@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
+import { token } from "../../App";
 import { Link, useNavigate } from "react-router-dom";
 import "./../../styles/form.css";
 
@@ -10,6 +11,11 @@ export const RegistrationPage = () => {
   const [repeatPassword, getRepeatPassword] = useState("");
   const [validatePassword, showValidatePassword] = useState("");
   const navigate = useNavigate();
+  const { accessToken, getAccessToken } = useContext(token);
+  useEffect(() => {
+    getAccessToken(false);
+    sessionStorage.clear();
+  }, []);
   const sendData = (e) => {
     e.preventDefault();
     if (!login.trim()) {
