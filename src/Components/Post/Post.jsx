@@ -90,22 +90,26 @@ export const Post = () => {
             <p className="post-text">Title: {postInfo[0].post_name}</p>
             <p className="post-text">Text: {postInfo[0].post_text}</p>
             <p className="post-text">Rating: {postInfo[0].rating}</p>
-            <div className="row">
-              <button
-                ref={like}
-                onClick={() => sendOpinion("like")}
-                className="bt-like"
-              >
-                Like!
-              </button>
-              <button
-                ref={dislike}
-                onClick={() => sendOpinion("dislike")}
-                className="bt-dislike"
-              >
-                Dislike!
-              </button>
-            </div>
+            {accessToken ? (
+              <div className="row">
+                <button
+                  ref={like}
+                  onClick={() => sendOpinion("like")}
+                  className="bt-like"
+                >
+                  Like!
+                </button>
+                <button
+                  ref={dislike}
+                  onClick={() => sendOpinion("dislike")}
+                  className="bt-dislike"
+                >
+                  Dislike!
+                </button>
+              </div>
+            ) : (
+              <div></div>
+            )}
           </div>
         ) : (
           <div>Loading...</div>
