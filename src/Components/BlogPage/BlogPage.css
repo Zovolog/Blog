@@ -74,7 +74,7 @@ textarea {
   align-items: center;
 }
 .post-name {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   margin-top: 7px;
   margin-bottom: 10px;
 }
@@ -82,4 +82,28 @@ textarea {
   font-size: 1.4rem;
   padding-bottom: 10px;
   margin-left: 10px;
+}
+.bt-create {
+  padding: 10px;
+  background-color: rgb(52, 150, 247);
+  color: white;
+  border: 0.5px solid black;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-right: 10px;
+  font-weight: 700;
+}
+.bt-create:hover {
+  background-color: rgb(32, 86, 140);
+}
+.bt-delete {
+  background-color: red;
+  color: white;
+  padding: 10px;
+  border: 0.5px solid black;
+  cursor: pointer;
+  font-weight: 700;
+}
+.bt-delete:hover {
+  background-color: rgb(199, 0, 0);
 }

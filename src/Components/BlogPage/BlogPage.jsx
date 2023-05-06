@@ -3,7 +3,13 @@ import logo from "./572.png";
 import { token } from "../../App";
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+} from "@mui/material";
 export const BlogPage = () => {
   const { accessToken, getAccessToken } = useContext(token);
   const userName = sessionStorage.getItem("userName");
@@ -11,6 +17,16 @@ export const BlogPage = () => {
   const [text, getText] = useState("");
   const [count, setCount] = useState(0);
   const [data, getData] = useState([]);
+  const [openCreateWindow, setOpenCreateWindow] = useState(false);
+  const [openDeleteWindow, setOpenDeleteWindow] = useState(false);
+  const navigate = useNavigate();
+  const openModalWindow = () => {
+    setOpenCreateWindow(true);
+  };
+
+  const closeModalWindow = () => {
+    setOpenDeleteWindow(false);
+  };
   const createPost = () => {
     axios
       .post("https://posts-5wdw.onrender.com/create-post", {
@@ -20,6 +36,7 @@ export const BlogPage = () => {
       })
       .then(function (response) {
         console.log(response.data);
+        setOpenCreateWindow(false);
         setCount(count + 1);
       })
       .catch(function (error) {
@@ -48,44 +65,39 @@ export const BlogPage = () => {
         console.log(error.response.data);
       });
   }, [count]);
+  const deleteUser = () => {
+    axios
+      .post("https://posts-5wdw.onrender.com/delete-user", {
+        username: userName,
+      })
+      .then(function (response) {
+        console.log(response.data);
+        setOpenCreateWindow(false);
+        navigate("/sign-in");
+      });
+  };
   return (
     <div>
       <div className="blog-header">
         <img src={logo} alt="logo" style={{ height: "100%" }} />
         {userName ? (
-          <p>Привіт, {userName}!</p>
+          <div>
+            <p>Привіт, {userName}!</p>
+            <button className="bt-create" onClick={openModalWindow}>
+              Create post
+            </button>
+            <button
+              className="bt-delete"
+              onClick={(e) => setOpenDeleteWindow(true)}
+            >
+              Delete account
+            </button>
+          </div>
         ) : (
           <Link to={"/sign-in"}>You need to login!</Link>
         )}
       </div>
       <div className="blog-main">
-        {accessToken ? (
-          <div>
-            <p className="blog-head-text">Create post block</p>
-            <div className="blog-input-block">
-              <input
-                type="text"
-                placeholder="Type name of post..."
-                className="small-input"
-                onChange={(e) => getName(e.currentTarget.value)}
-              />
-
-              <textarea
-                placeholder="Type your thoughts"
-                className="big-input"
-                onChange={(e) => getText(e.currentTarget.value)}
-              ></textarea>
-              <button className="blog-bt" onClick={createPost}>
-                Create post
-              </button>
-            </div>
-          </div>
-        ) : (
-          <div className="blog-head-text">
-            You need to be <Link to={"/sign-in"}>loggined</Link> to create
-            posts!
-          </div>
-        )}
         <p className="blog-head-text">Post list</p>
         <div className="blog-list">
           {data.map((post, i) => (
@@ -108,6 +120,53 @@ export const BlogPage = () => {
           ))}
         </div>
       </div>
+      <Dialog open={openCreateWindow} onClose={closeModalWindow}>
+        <DialogTitle>Add new album</DialogTitle>
+        <DialogContent>
+          <p className="blog-head-text">Create post block</p>
+          <div className="blog-input-block">
+            <input
+              type="text"
+              placeholder="Type name of post..."
+              className="small-input"
+              onChange={(e) => getName(e.currentTarget.value)}
+            />
+
+            <textarea
+              placeholder="Type your thoughts"
+              className="big-input"
+              onChange={(e) => getText(e.currentTarget.value)}
+            ></textarea>
+          </div>
+        </DialogContent>
+        <DialogActions>
+          <button className="bt-create" onClick={createPost}>
+            Create post
+          </button>
+          <button className="bt-delete" onClick={closeModalWindow}>
+            Cancel
+          </button>
+        </DialogActions>
+      </Dialog>
+      <Dialog open={openDeleteWindow} onClose={closeModalWindow}>
+        <DialogTitle>Add new album</DialogTitle>
+        <DialogContent>
+          <p className="blog-head-text">
+            Are you sure that you want to delete your account?
+          </p>
+        </DialogContent>
+        <DialogActions>
+          <button className="bt-create" onClick={deleteUser}>
+            Delete user
+          </button>
+          <button
+            className="bt-delete"
+            onClick={(e) => setOpenDeleteWindow(false)}
+          >
+            Cancel
+          </button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };

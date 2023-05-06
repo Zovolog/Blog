@@ -85,10 +85,17 @@ export const Post = () => {
       <div className="blog-main">
         {postInfo.length > 0 ? (
           <div className="post-post-block">
-            <p className="post-date"></p>
-            <p className="post-name">Was created by {postInfo[0].user_name}</p>
-            <p className="post-text">Title: {postInfo[0].post_name}</p>
-            <p className="post-text">Text: {postInfo[0].post_text}</p>
+            <p className="post-text">
+              <img
+                alt="icon"
+                src={`https://api.dicebear.com/6.x/initials/svg?seed=${postInfo[0].user_name}`}
+                className="blog-icon"
+              />{" "}
+              {postInfo[0].user_name} posted{" "}
+              <span className="post-under-text">{postInfo[0].created_at}</span>
+            </p>
+            <p className="post-name">{postInfo[0].post_name}</p>
+            <p className="post-text">{postInfo[0].post_text}</p>
             <p className="post-text">Rating: {postInfo[0].rating}</p>
             {accessToken ? (
               <div className="row">
