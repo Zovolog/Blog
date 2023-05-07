@@ -68,6 +68,7 @@ textarea {
   color: grey;
   font-size: 0.7rem;
   margin-left: 10px;
+  padding-top: 10px;
 }
 .row {
   display: flex;
@@ -89,7 +90,6 @@ textarea {
   color: white;
   border: 0.5px solid black;
   cursor: pointer;
-  margin-top: 10px;
   margin-right: 10px;
   font-weight: 700;
 }

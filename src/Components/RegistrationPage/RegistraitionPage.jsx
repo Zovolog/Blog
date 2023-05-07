@@ -74,7 +74,7 @@ export const RegistrationPage = () => {
           <button className="form-bt" onClick={sendData}>
             Register
           </button>
-          <Link to={"/"}>Already have account?</Link>
+          <Link to={"/sign-in"}>Already have account?</Link>
         </div>
       </div>
     </div>

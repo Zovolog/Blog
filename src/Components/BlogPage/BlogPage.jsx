@@ -25,7 +25,7 @@ export const BlogPage = () => {
   };
 
   const closeModalWindow = () => {
-    setOpenDeleteWindow(false);
+    setOpenCreateWindow(false);
   };
   const createPost = () => {
     axios
@@ -82,7 +82,7 @@ export const BlogPage = () => {
         <img src={logo} alt="logo" style={{ height: "100%" }} />
         {userName ? (
           <div>
-            <p>Привіт, {userName}!</p>
+            <p style={{ marginBottom: "10px" }}>Привіт, {userName}!</p>
             <button className="bt-create" onClick={openModalWindow}>
               Create post
             </button>
@@ -148,7 +148,10 @@ export const BlogPage = () => {
           </button>
         </DialogActions>
       </Dialog>
-      <Dialog open={openDeleteWindow} onClose={closeModalWindow}>
+      <Dialog
+        open={openDeleteWindow}
+        onClose={(e) => setOpenDeleteWindow(false)}
+      >
         <DialogTitle>Add new album</DialogTitle>
         <DialogContent>
           <p className="blog-head-text">

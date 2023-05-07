@@ -85,7 +85,10 @@ export const Post = () => {
       <div className="blog-main">
         {postInfo.length > 0 ? (
           <div className="post-post-block">
-            <p className="post-text">
+            <p
+              className="post-text"
+              style={{ display: "flex", alignItems: "center" }}
+            >
               <img
                 alt="icon"
                 src={`https://api.dicebear.com/6.x/initials/svg?seed=${postInfo[0].user_name}`}
@@ -144,9 +147,9 @@ export const Post = () => {
           ) : (
             <div>No comments yet!</div>
           )}
-          <div className="post-comment-block-form">
+          <div>
             {accessToken ? (
-              <div>
+              <div className="post-comment-block-form">
                 <img
                   alt="icon"
                   src={`https://api.dicebear.com/6.x/initials/svg?seed=${userName}`}
