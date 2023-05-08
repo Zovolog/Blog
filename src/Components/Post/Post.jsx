@@ -77,9 +77,11 @@ export const Post = () => {
         <img src={logo} alt="logo" style={{ height: "100%" }} />
         <Link to={"/blog-page"}>Return to all posts</Link>
         {userName ? (
-          <p>Привіт, {userName}!</p>
+          <p style={{ marginRight: "10px" }}>Привіт, {userName}!</p>
         ) : (
-          <Link to={"/sign-in"}>You need to login!</Link>
+          <Link to={"/sign-in"} style={{ marginRight: "10px" }}>
+            You need to login!
+          </Link>
         )}
       </div>
       <div className="blog-main">
@@ -145,7 +147,9 @@ export const Post = () => {
               ))}
             </div>
           ) : (
-            <div>No comments yet!</div>
+            <div style={{ marginTop: "15px", marginBottom: "15px" }}>
+              No comments yet!
+            </div>
           )}
           <div>
             {accessToken ? (
@@ -166,7 +170,7 @@ export const Post = () => {
                 </button>
               </div>
             ) : (
-              <div>
+              <div style={{ marginBottom: "10px" }}>
                 You need to be <Link to={"/sign-in"}>loggined</Link> to comment
                 posts!
               </div>

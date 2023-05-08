@@ -103,18 +103,20 @@ export const BlogPage = () => {
           {data.map((post, i) => (
             <Link to={`/blog-page/blog/${post.id}`} key={i}>
               <div key={i} className="post">
-                <p className="post-date">{post.created_at}</p>
-                <div className="row post-name">
-                  <img
-                    alt="icon"
-                    src={`https://api.dicebear.com/6.x/initials/svg?seed=${post.user_name}`}
-                    className="blog-icon"
-                  />
-                  <p>
-                    {post.user_name} created {post.post_name}{" "}
-                  </p>
+                <div style={{ padding: "15px" }}>
+                  <p className="post-date">{post.created_at}</p>
+                  <div className="row post-name">
+                    <img
+                      alt="icon"
+                      src={`https://api.dicebear.com/6.x/initials/svg?seed=${post.user_name}`}
+                      className="blog-icon"
+                    />
+                    <p>
+                      {post.user_name} created {post.post_name}{" "}
+                    </p>
+                  </div>
+                  <p className="post-text">{post.post_text}</p>
                 </div>
-                <p className="post-text">{post.post_text}</p>
               </div>
             </Link>
           ))}
